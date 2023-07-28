@@ -2,7 +2,7 @@
 {
     public interface IGameFactory
     {
-        public void CreatePlayer();
+        public void CreateCharacter();
         public void CreateHUD();
     }
 }

@@ -2,8 +2,7 @@
 {
     public class GameFactory : IGameFactory
     {
-        
-        public void CreatePlayer()
+        public void CreateCharacter()
         {
         }
 
@@ -12,8 +11,7 @@
         }
 
         public void CreateEnemy()
-        {
-            
+        { 
         }
     }
 }
