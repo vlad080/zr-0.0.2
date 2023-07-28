@@ -17,12 +17,12 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: eec1d581eed103a40885a91a3d9df54c
   m_SerializeEntries:
-  - m_GUID: de0cf8f32a4a16941b3a5da2f8089eeb
-    m_Address: Player/Player
-    m_ReadOnly: 0
-    m_SerializedLabels: []
   - m_GUID: f2c159200c51e554380fe67276b67c30
     m_Address: Enemy
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: de0cf8f32a4a16941b3a5da2f8089eeb
+    m_Address: Player
     m_ReadOnly: 0
     m_SerializedLabels: []
   m_ReadOnly: 0

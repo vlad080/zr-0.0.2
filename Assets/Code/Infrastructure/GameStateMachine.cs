@@ -9,12 +9,13 @@ namespace Code.Infrastructure
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, IGameFactory gameFactory)
+        public GameStateMachine(SceneLoader sceneLoader, IGameFactory gameFactory, LoadingCurtain curtain)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, gameFactory),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, gameFactory, curtain),
+                [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }
 

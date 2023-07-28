@@ -4175,6 +4175,7 @@ GameObject:
   - component: {fileID: 1485631589748338424}
   - component: {fileID: 1571474348636835974}
   - component: {fileID: 1571474348636835973}
+  - component: {fileID: 698194857}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -4189,7 +4190,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1571474348636835972}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 115.2278, y: 0.00000047683716, z: -15.48441}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -4238,7 +4239,7 @@ Animator:
   m_GameObject: {fileID: 1571474348636835972}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ffdfcb810f2918b4f8fe9f917f07bc78, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0cbf1c73736e7144bbc56e9652769c07, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4280,10 +4281,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CharacterController: {fileID: 1571474348636835974}
-  CharacterSpeed: 12
-  Gravity: -9.81
-  JumpHeight: 3
-  SprintSpeed: 5
+  CharacterSpeed: 6
+  Velocity: 0
+--- !u!114 &698194857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571474348636835972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a36b5e71837b0bf4ebb147643f9628aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 1485631589748338424}
+  PlayerMovement: {fileID: 1571474348636835973}
 --- !u!1 &1571481661868485438
 GameObject:
   m_ObjectHideFlags: 0
