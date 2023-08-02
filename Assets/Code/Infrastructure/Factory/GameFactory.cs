@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.AssetManagement;
+﻿using System.Threading.Tasks;
+using Code.Infrastructure.AssetManagement;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
@@ -11,9 +12,10 @@ namespace Code.Infrastructure.Factory
         {
             _assetProvider = assetProvider;
         }
+
         public void CreateCharacter()
         {
-           // GameObject prefab = await _assetProvider.Load<GameObject>();
+          //   GameObject prefab = await _assetProvider.Load<GameObject>();
         }
 
         public void CreateHUD()
@@ -21,7 +23,17 @@ namespace Code.Infrastructure.Factory
         }
 
         public void CreateEnemy()
-        { 
+        {
+        }
+
+        public async Task WarmUp()
+        {
+            await _assetProvider.Load<GameObject>(AssetAddress.PlayerAddress);
+        }
+
+        public void ClenUp()
+        {
+            _assetProvider.CleanUp();
         }
     }
 }

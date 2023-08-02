@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Code.Infrastructure
 {
@@ -9,11 +10,14 @@ namespace Code.Infrastructure
     {
         private readonly ICoroutineRunner _coroutineRunner;
 
+        
         public SceneLoader(ICoroutineRunner coroutineRunner) =>
             _coroutineRunner = coroutineRunner;
 
-        public void Load(string name, Action onLoaded = null) =>
+        public void Load(string name, Action onLoaded = null)
+        {
             _coroutineRunner.StartCoroutine(LoadScene(name, onLoaded));
+        }
 
         private IEnumerator LoadScene(string nameScene, Action onLoad = null)
         {

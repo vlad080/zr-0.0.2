@@ -1,4 +1,6 @@
-﻿using Code.Services.Input;
+﻿using Code.Infrastructure.AssetManagement;
+using Code.Services.Input;
+using Zenject;
 
 namespace Code.Infrastructure
 {
@@ -8,10 +10,11 @@ namespace Code.Infrastructure
         private const string INITIAL_SCENE = "Initial";
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
-        private IInputService _inputService;
-
-        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader)
+        private readonly IAssetProvider _assetProvider;
+        
+        public BootstrapState(GameStateMachine stateMachine, SceneLoader sceneLoader, IAssetProvider assetProvider)
         {
+            _assetProvider = assetProvider;
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
         }
@@ -27,8 +30,7 @@ namespace Code.Infrastructure
 
         private void RegisterServices()
         {
-          //  _inputService = SetupInputService();
-            
+          // _assetProvider.Initialize();
         }
 
         public void Exit()

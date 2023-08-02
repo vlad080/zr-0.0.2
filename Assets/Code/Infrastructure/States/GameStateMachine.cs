@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 
 namespace Code.Infrastructure
@@ -9,11 +10,11 @@ namespace Code.Infrastructure
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, IAssetProvider assetProvider)
         {
             _states = new Dictionary<Type, IExitableState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader),
+                [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader,assetProvider),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,  curtain),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };

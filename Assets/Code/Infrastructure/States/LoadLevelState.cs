@@ -22,6 +22,7 @@ namespace Code.Infrastructure
         {
             _curtain.Show();
             _sceneLoader.Load(sceneName,OnLoaded);
+            //_gameFactory.WarmUp();
         }
 
         public void Exit()
