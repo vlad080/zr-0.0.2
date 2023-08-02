@@ -1,4 +1,6 @@
-﻿using Code.Services.Input;
+﻿using Code.Infrastructure.AssetManagement;
+using Code.Infrastructure.Factory;
+using Code.Services.Input;
 using UnityEngine;
 using Zenject;
 
@@ -12,6 +14,9 @@ namespace Code.Infrastructure
         {
             BindJoystickService();
             BindInputService();
+            BindAssetProviderService();
+            BindFactoryService();
+           
         }
 
         private void BindJoystickService()
@@ -20,7 +25,20 @@ namespace Code.Infrastructure
                 FromComponentInNewPrefab(JoystickService).
                 AsSingle();
         }
-
+        
+        private void BindAssetProviderService()
+        {
+            Container.Bind<IAssetProvider>().
+                To<AssetProvider>().
+                AsSingle();
+        }
+        private void BindFactoryService()
+        {
+            Container.Bind<IGameFactory>().
+                To<GameFactory>().
+                AsSingle();
+        }
+        
         private void BindInputService()
         {
             if (Application.isEditor)

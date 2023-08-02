@@ -1,11 +1,12 @@
+using Code.Character;
 using UnityEngine;
 
 namespace Code.Player
 {
-    public class PlayerAnimation : MonoBehaviour
+    public class CharacterAnimation : MonoBehaviour
     {
         public Animator Animator;
-        public PlayerMovement PlayerMovement;
+        public CharacterMovement CharacterMovement;
         
         private static readonly int MoveHash = Animator.StringToHash("Walking");
 
@@ -13,6 +14,6 @@ namespace Code.Player
             WalkingState();
 
         private void WalkingState() =>
-            Animator.SetFloat(MoveHash, PlayerMovement.Velocity, 0.1f, Time.deltaTime);
+            Animator.SetFloat(MoveHash, CharacterMovement.Velocity, 0.1f, Time.deltaTime);
     }
 }

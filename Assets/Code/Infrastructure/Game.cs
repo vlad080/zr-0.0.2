@@ -1,5 +1,3 @@
-using Code.Infrastructure.Factory;
-
 namespace Code.Infrastructure
 {
     public class Game
@@ -9,9 +7,7 @@ namespace Code.Infrastructure
 
         public Game(ICoroutineRunner coroutineRunner, LoadingCurtain curtain)
         {
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), new GameFactory(), curtain);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), curtain);
         }
-
-       
     }
 }

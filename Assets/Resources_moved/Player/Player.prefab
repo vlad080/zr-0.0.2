@@ -4296,7 +4296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 1485631589748338424}
-  PlayerMovement: {fileID: 1571474348636835973}
+  CharacterMovement: {fileID: 1571474348636835973}
 --- !u!1 &1571481661868485438
 GameObject:
   m_ObjectHideFlags: 0

@@ -3,9 +3,9 @@ using Code.Services.Input;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Player
+namespace Code.Character
 {
-    public class PlayerMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour
     {
         public CharacterController CharacterController;
         [SerializeField] private float CharacterSpeed;

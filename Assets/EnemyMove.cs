@@ -1,3 +1,4 @@
+using Code.Character;
 using Code.Player;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,7 +10,7 @@ public class EnemyMove : MonoBehaviour
 
     private void Start()
     {
-        _target = FindObjectOfType<PlayerMovement>().transform;
+        _target = FindObjectOfType<CharacterMovement>().transform;
         MoveToTarget();
     }
 
