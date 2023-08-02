@@ -15,8 +15,8 @@ namespace Code.Character
         private float _turnSmoothVelocity;
         private const float TURN_SMOOTH_TIME = 0.1f;
 
-        [Inject]
-        public void Construct(IInputService inputService) => 
+        //[Inject]
+        public void Construct(IInputService inputService) =>  
             _inputService = inputService;
 
         private void Start()

@@ -8,6 +8,6 @@ namespace Code.Infrastructure.AssetManagement
         //Task<T> Load<T>(AssetReference assetReference) where T : class;
         Task<T> Load<T>(string assetPath)where T : class;
         void CleanUp();
-        void Initialize();
+        void AddressablesInitialize();
     }
 }

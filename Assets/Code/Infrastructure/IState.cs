@@ -1,4 +1,6 @@
-﻿namespace Code.Infrastructure
+﻿using System.Threading.Tasks;
+
+namespace Code.Infrastructure
 {
     public interface IState : IExitableState
     {
@@ -7,7 +9,7 @@
 
     public interface IPayloadState<TPayload> : IExitableState
     {
-        void Enter(TPayload payload);
+        Task Enter(TPayload payload);
     }
 
     public interface IExitableState

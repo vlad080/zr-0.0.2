@@ -7,15 +7,17 @@ namespace Code.Infrastructure
 {
     public class GameStateMachine
     {
+        private readonly IGameFactory _gameFactory;
         private readonly Dictionary<Type, IExitableState> _states;
         private IExitableState _activeState;
 
-        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, IAssetProvider assetProvider)
+        public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, IAssetProvider assetProvider, IGameFactory gameFactory)
         {
+            _gameFactory = gameFactory;
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader,assetProvider),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,  curtain),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader,  curtain,gameFactory),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }

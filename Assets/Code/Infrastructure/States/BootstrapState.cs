@@ -30,7 +30,7 @@ namespace Code.Infrastructure
 
         private void RegisterServices()
         {
-          // _assetProvider.Initialize();
+            _assetProvider.AddressablesInitialize();
         }
 
         public void Exit()

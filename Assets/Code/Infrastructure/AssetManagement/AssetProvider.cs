@@ -12,7 +12,9 @@ namespace Code.Infrastructure.AssetManagement
         private readonly Dictionary<string, List<AsyncOperationHandle>> _handles =
             new Dictionary<string, List<AsyncOperationHandle>>();
 
-        public void Initialize() => 
+        
+        
+        public void AddressablesInitialize() => 
             Addressables.InitializeAsync();
 
         public async Task<T> Load<T>(string assetPath) where T : class
