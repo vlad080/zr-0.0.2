@@ -2,7 +2,7 @@
 
 namespace Code.Services.Input
 {
-    public interface IInputService : IServices
+    public interface IInputService : IService
     {
         Vector3 LeftAxis { get; }
        // Vector3 RightAxis { get; }

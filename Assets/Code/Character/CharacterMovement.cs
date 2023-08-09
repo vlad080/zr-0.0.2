@@ -1,11 +1,13 @@
 using Code.CameraLogic;
+using Code.Data;
 using Code.Services.Input;
+using Code.Services.PersistentProgress;
 using UnityEngine;
 using Zenject;
 
 namespace Code.Character
 {
-    public class CharacterMovement : MonoBehaviour
+    public class CharacterMovement : MonoBehaviour, ISaveProgress
     {
         public CharacterController CharacterController;
         [SerializeField] private float CharacterSpeed;
@@ -25,7 +27,7 @@ namespace Code.Character
             CameraFollow();
         }
 
-        void Update() => 
+        private void Update() => 
             Move();
 
         private void CameraFollow() =>
@@ -47,6 +49,16 @@ namespace Code.Character
             transform.rotation = Quaternion.Euler(0.0f, angle, 0.0f);
 
             CharacterController.Move(direction * CharacterSpeed * Time.deltaTime);
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
+             
+        }
+
+        public void UpdateProgress(PlayerProgress progress)
+        {
+           
         }
     }
 }
