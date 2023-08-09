@@ -1,8 +1,6 @@
 ﻿using Code.Infrastructure.AssetManagement;
-using Code.Services.Input;
-using Zenject;
 
-namespace Code.Infrastructure
+namespace Code.Infrastructure.States
 {
     public class BootstrapState : IState   
     {

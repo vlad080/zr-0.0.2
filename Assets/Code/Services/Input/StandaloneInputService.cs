@@ -14,19 +14,11 @@ namespace Code.Services.Input
             }
         }
 
-       // public override Vector3 RightAxis
-       // {
-       //     get
-       //     {
-       //         Vector3 axis = JoystickInputAxisRight();
-       //          if (axis == Vector3.Zero) axis = StandaloneAxisRight();
-       //         return axis;
-       //     }
-       // }
-
         private static Vector3 StandaloneAxisLeft() =>
-            new Vector3(UnityEngine.Input.GetAxis(HorizontalAxis),0 ,UnityEngine.Input.GetAxis(VerticalAxis));
+            new Vector3(UnityEngine.Input.GetAxis(HorizontalAxis), 0, UnityEngine.Input.GetAxis(VerticalAxis));
+
         private static Vector3 StandaloneAxisRight() =>
-            new Vector3(UnityEngine.Input.GetAxis(HorizontalAxisMouse),UnityEngine.Input.GetAxis(VerticalAxisMouse) ,0);
+            new Vector3(UnityEngine.Input.GetAxis(HorizontalAxisMouse), UnityEngine.Input.GetAxis(VerticalAxisMouse),
+                0);
     }
 }

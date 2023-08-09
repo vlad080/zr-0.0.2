@@ -19,26 +19,31 @@ namespace Code.Infrastructure.Factory
 
         public async Task<GameObject> CreateCharacter()
         {
-            var prefab = await _assetProvider.Load<GameObject>(AssetAddress.PlayerAddress);
-             GameObject character = Object.Instantiate(prefab);
-              character.GetComponent<CharacterMovement>().Construct(_inputService);
-             return character;
+            GameObject character = await Create(AssetAddress.PlayerAddress);
+            character.GetComponent<CharacterMovement>().Construct(_inputService);
+            return character;
         }
 
-        public void CreateHUD()
+        public async Task<GameObject> CreateHUD() => 
+            await Create(AssetAddress.HUDAddress);
+
+        public async Task<GameObject> CreateEnemy()
         {
+            GameObject enemy = await Create(AssetAddress.EnemyAddress);
+            return enemy;
         }
 
-        public void CreateEnemy()
+        private async Task<GameObject> Create( string address)
         {
+            GameObject prefab = await _assetProvider.Load<GameObject>(address);
+            GameObject go = Object.Instantiate(prefab);
+            return go;
         }
 
-        public async Task WarmUp() => 
+        public async Task WarmUp() =>
             await _assetProvider.Load<GameObject>(AssetAddress.PlayerAddress);
 
-        public void ClenUp()
-        {
+        public void ClenUp() => 
             _assetProvider.CleanUp();
-        }
     }
 }

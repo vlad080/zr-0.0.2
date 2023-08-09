@@ -25,6 +25,10 @@ MonoBehaviour:
     m_Address: Player
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5f6938b16fc635a4187d8eb7c9887af0
+    m_Address: HUD
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: 247b6057f859be4498fadccb76965ef7, type: 2}
   m_SchemaSet:

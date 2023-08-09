@@ -1,15 +1,14 @@
 ﻿using System.Threading.Tasks;
 using Code.Infrastructure.Factory;
-using Zenject;
 
-namespace Code.Infrastructure
+namespace Code.Infrastructure.States
 {
     public class LoadLevelState : IPayloadState<string>
     {
         private readonly GameStateMachine _stateMachine;
         private readonly SceneLoader _sceneLoader;
-        private readonly IGameFactory _gameFactory;
         private readonly LoadingCurtain _curtain;
+        private readonly IGameFactory _gameFactory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
             LoadingCurtain curtain, IGameFactory gameFactory)
@@ -24,13 +23,15 @@ namespace Code.Infrastructure
         {
             _curtain.Show();
             _sceneLoader.Load(sceneName, OnLoaded);
-            _gameFactory.WarmUp();
-            await InitialCharacter();
+            await _gameFactory.WarmUp();
+            await InitialWorld();
         }
 
-        private async Task InitialCharacter()
+        private async Task InitialWorld()
         {
             await _gameFactory.CreateCharacter();
+            await _gameFactory.CreateEnemy();
+            await _gameFactory.CreateHUD();
         }
 
         public void Exit()

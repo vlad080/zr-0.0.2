@@ -6,7 +6,8 @@ namespace Code.Infrastructure.Factory
     public interface IGameFactory
     {
         public Task<GameObject> CreateCharacter();
-        public void CreateHUD();
+        public Task<GameObject> CreateEnemy();
+        public Task<GameObject> CreateHUD();
         void ClenUp();
         Task WarmUp();
     }

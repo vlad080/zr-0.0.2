@@ -15,7 +15,7 @@ namespace Code.Character
         private float _turnSmoothVelocity;
         private const float TURN_SMOOTH_TIME = 0.1f;
 
-        //[Inject]
+       
         public void Construct(IInputService inputService) =>  
             _inputService = inputService;
 
@@ -38,7 +38,7 @@ namespace Code.Character
 
             Vector3 direction = new Vector3(-horizontalAxis, 0.0f, -verticalAxis).normalized;
             Velocity = direction.magnitude;
-            // Debug.Log("magnitude "+direction.magnitude);
+              Debug.Log("magnitude "+direction.magnitude);
             if (!(direction.magnitude >= 0.1f)) return;
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
