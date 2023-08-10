@@ -3,7 +3,6 @@ using Code.Data;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Character
 {
@@ -17,8 +16,7 @@ namespace Code.Character
         private float _turnSmoothVelocity;
         private const float TURN_SMOOTH_TIME = 0.1f;
 
-       
-        public void Construct(IInputService inputService) =>  
+        public void Construct(IInputService inputService) =>
             _inputService = inputService;
 
         private void Start()
@@ -27,7 +25,7 @@ namespace Code.Character
             CameraFollow();
         }
 
-        private void Update() => 
+        private void Update() =>
             Move();
 
         private void CameraFollow() =>
@@ -40,7 +38,7 @@ namespace Code.Character
 
             Vector3 direction = new Vector3(-horizontalAxis, 0.0f, -verticalAxis).normalized;
             Velocity = direction.magnitude;
-              Debug.Log("magnitude "+direction.magnitude);
+            Debug.Log("magnitude " + direction.magnitude);
             if (!(direction.magnitude >= 0.1f)) return;
 
             float targetAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
@@ -51,14 +49,13 @@ namespace Code.Character
             CharacterController.Move(direction * CharacterSpeed * Time.deltaTime);
         }
 
-        public void LoadProgress(PlayerProgress progress)
-        {
-             
-        }
-
         public void UpdateProgress(PlayerProgress progress)
         {
-           
+            progress.WorldData.Position = transform.position.AsVector3Data();
+        }
+
+        public void LoadProgress(PlayerProgress progress)
+        {
         }
     }
 }
