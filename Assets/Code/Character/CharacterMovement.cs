@@ -3,6 +3,7 @@ using Code.Data;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Code.Character
 {
@@ -51,11 +52,28 @@ namespace Code.Character
 
         public void UpdateProgress(PlayerProgress progress)
         {
-            progress.WorldData.Position = transform.position.AsVector3Data();
+            progress.WorldData.PositionOnLevel =
+                new PositionOnLevel(CurrentScene(), transform.position.ConvertToVector3Data());
         }
 
         public void LoadProgress(PlayerProgress progress)
         {
+            if (CurrentScene() == progress.WorldData.PositionOnLevel.Level
+                && progress.WorldData.PositionOnLevel.Position != null)
+            {
+                Vector3Data savedPosition = progress.WorldData.PositionOnLevel.Position;
+                Reposition(savedPosition);
+            }
         }
+
+        private void Reposition(Vector3Data savedPosition)
+        {
+            CharacterController.enabled = false;
+            transform.position = savedPosition.ConvertToUnityVector();
+            CharacterController.enabled = true;
+        }
+
+        private static string CurrentScene() =>
+            SceneManager.GetActiveScene().name;
     }
 }
