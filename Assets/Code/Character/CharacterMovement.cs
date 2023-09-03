@@ -2,12 +2,13 @@ using Code.CameraLogic;
 using Code.Data;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
+using Code.Services.PersistentProgress.SaveLoad;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Code.Character
 {
-    public class CharacterMovement : MonoBehaviour, ISaveProgress
+    public class CharacterMovement : MonoBehaviour, ISavedProgress
     {
         public CharacterController CharacterController;
         [SerializeField] private float CharacterSpeed;

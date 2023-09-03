@@ -1,7 +1,9 @@
 ﻿using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
+using Code.Infrastructure.States;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
+using Code.Services.PersistentProgress.SaveLoad;
 using UnityEngine;
 using Zenject;
 
@@ -18,9 +20,13 @@ namespace Code.Infrastructure
             BindAssetProviderService();
             BindFactoryService();
             BindPersistentProgressService();
+            BindSaveLoadService();
         }
 
-        private void BindPersistentProgressService() => 
+        private void BindSaveLoadService() =>
+            Container.Bind<ISavedLoadService>().To<SavedLoadService>().AsSingle();
+
+        private void BindPersistentProgressService() =>
             Container.Bind<IPersistentProgressService>().To<PersistentProgressService>().AsSingle();
 
         private void BindJoystickService() =>

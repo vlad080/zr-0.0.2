@@ -1,6 +1,7 @@
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Infrastructure.States;
+using Code.Services.PersistentProgress;
 
 namespace Code.Infrastructure
 {
@@ -11,10 +12,12 @@ namespace Code.Infrastructure
         // public static IInputService InputService;
         public readonly GameStateMachine StateMachine;
 
-        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain curtain, IAssetProvider assetProvider, IGameFactory gameFactory)
+        public Game(ICoroutineRunner coroutineRunner, LoadingCurtain curtain, IAssetProvider assetProvider, 
+            IGameFactory gameFactory, IPersistentProgressService persistentProgress, ISavedLoadService savedLoad)
         {
             _gameFactory = gameFactory;
-            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), curtain, assetProvider,gameFactory);
+            StateMachine = new GameStateMachine(new SceneLoader(coroutineRunner), 
+                curtain, assetProvider,gameFactory, persistentProgress,savedLoad);
         }
     }
 }

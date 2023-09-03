@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
+using Code.Services.PersistentProgress;
 
 namespace Code.Infrastructure.States
 {
@@ -11,12 +12,13 @@ namespace Code.Infrastructure.States
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, IAssetProvider assetProvider,
-            IGameFactory gameFactory)
+            IGameFactory gameFactory, IPersistentProgressService persistentProgressService, ISavedLoadService savedLoadService)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, assetProvider),
                 [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, gameFactory),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService,savedLoadService ),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }
