@@ -1,6 +1,6 @@
 ﻿using Code.Data;
 
-namespace Code.Infrastructure.States
+namespace Code.Services.PersistentProgress.SaveLoad
 {
     public interface ISavedLoadService
     {

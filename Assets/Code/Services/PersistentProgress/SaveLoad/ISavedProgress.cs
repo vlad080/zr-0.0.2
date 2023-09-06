@@ -2,12 +2,12 @@
 
 namespace Code.Services.PersistentProgress.SaveLoad
 {
-    public interface ISaveProgressReader
+    public interface ISavedProgressReader
     {
         void LoadProgress(PlayerProgress progress);
     }
 
-    public interface ISavedProgress : ISaveProgressReader
+    public interface ISavedProgress : ISavedProgressReader
     {
         void UpdateProgress(PlayerProgress progress);
     }

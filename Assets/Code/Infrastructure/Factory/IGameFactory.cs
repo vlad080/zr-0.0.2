@@ -1,4 +1,6 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Code.Services.PersistentProgress.SaveLoad;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
@@ -10,5 +12,7 @@ namespace Code.Infrastructure.Factory
         public Task<GameObject> CreateHUD();
         void ClenUp();
         Task WarmUp();
+        List<ISavedProgressReader> ProgressReaders { get; }
+        List<ISavedProgress> ProgressWriters { get; }
     }
 }

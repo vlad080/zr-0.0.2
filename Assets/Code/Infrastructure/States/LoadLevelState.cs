@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Code.Infrastructure.Factory;
+using Code.Services.PersistentProgress;
+using Code.Services.PersistentProgress.SaveLoad;
 
 namespace Code.Infrastructure.States
 {
@@ -9,13 +11,15 @@ namespace Code.Infrastructure.States
         private readonly SceneLoader _sceneLoader;
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
+        private readonly IPersistentProgressService _progressService;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            LoadingCurtain curtain, IGameFactory gameFactory)
+            LoadingCurtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
+            _progressService = progressService;
             _curtain = curtain;
         }
 
@@ -23,8 +27,8 @@ namespace Code.Infrastructure.States
         {
             _curtain.Show();
             _sceneLoader.Load(sceneName, OnLoaded);
-            await _gameFactory.WarmUp();
-            await InitialWorld();
+            _gameFactory.ClenUp(); 
+            
         }
 
         private async Task InitialWorld()
@@ -39,9 +43,18 @@ namespace Code.Infrastructure.States
             _curtain.Hide();
         }
 
-        private void OnLoaded()
+        private async void OnLoaded()
         {
+            await _gameFactory.WarmUp();
+            await InitialWorld();
+            InformProgressReaders();
             _stateMachine.Enter<GameLoopState>();
+        }
+
+        private void InformProgressReaders()
+        {
+            foreach (ISavedProgressReader progressReader in _gameFactory.ProgressReaders)
+                progressReader.LoadProgress(_progressService.Progress);
         }
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
 using Code.Services.PersistentProgress;
+using Code.Services.PersistentProgress.SaveLoad;
 
 namespace Code.Infrastructure.States
 {
@@ -12,13 +13,13 @@ namespace Code.Infrastructure.States
         private IExitableState _activeState;
 
         public GameStateMachine(SceneLoader sceneLoader, LoadingCurtain curtain, IAssetProvider assetProvider,
-            IGameFactory gameFactory, IPersistentProgressService persistentProgressService, ISavedLoadService savedLoadService)
+            IGameFactory gameFactory, IPersistentProgressService progressService, ISavedLoadService savedLoadService)
         {
             _states = new Dictionary<Type, IExitableState>
             {
                 [typeof(BootstrapState)] = new BootstrapState(this, sceneLoader, assetProvider),
-                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, gameFactory),
-                [typeof(LoadProgressState)] = new LoadProgressState(this, persistentProgressService,savedLoadService ),
+                [typeof(LoadLevelState)] = new LoadLevelState(this, sceneLoader, curtain, gameFactory,progressService),
+                [typeof(LoadProgressState)] = new LoadProgressState(this, progressService,savedLoadService ),
                 [typeof(GameLoopState)] = new GameLoopState(this),
             };
         }

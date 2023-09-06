@@ -24,7 +24,7 @@ namespace Code.Infrastructure.States
         }
 
         private void EnterLoadLevel() => 
-            _stateMachine.Enter<LoadLevelState, string>(CITY_SCENE);
+            _stateMachine.Enter<LoadProgressState>();
 
         private void RegisterServices()
         {
