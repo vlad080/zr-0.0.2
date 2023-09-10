@@ -21,7 +21,11 @@ namespace Code.Infrastructure
             BindFactoryService();
             BindPersistentProgressService();
             BindSaveLoadService();
+            BindCharacterFactoryService();
         }
+
+        private void BindCharacterFactoryService() =>
+            Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();
 
         private void BindSaveLoadService() =>
             Container.Bind<ISavedLoadService>().To<SavedLoadService>().AsSingle();

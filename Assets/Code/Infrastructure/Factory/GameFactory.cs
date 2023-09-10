@@ -11,20 +11,19 @@ namespace Code.Infrastructure.Factory
     public class GameFactory : IGameFactory
     {
         private readonly IAssetProvider _assetProvider;
-        private readonly IInputService _inputService;
+        private readonly ICharacterFactory _characterFactory;
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        public GameFactory(IAssetProvider assetProvider, IInputService inputService)
+        public GameFactory(IAssetProvider assetProvider, ICharacterFactory characterFactory)
         {
-            _inputService = inputService;
+            _characterFactory = characterFactory;
             _assetProvider = assetProvider;
         }
 
         public async Task<GameObject> CreateCharacter()
         {
-            GameObject character = await Create(AssetAddress.PlayerAddress);
-            character.GetComponent<CharacterMovement>().Construct(_inputService);
+            GameObject character = await _characterFactory.CreateCharacter();
             RegisterProgressWatchers(character);
 
             return character;
@@ -45,6 +44,7 @@ namespace Code.Infrastructure.Factory
             GameObject go = Object.Instantiate(prefab);
             return go;
         }
+
         private async Task<GameObject> Create(string address, Vector3 at)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(address);
@@ -73,7 +73,7 @@ namespace Code.Infrastructure.Factory
 
         private void Register(ISavedProgressReader progressReader)
         {
-            if (progressReader is ISavedProgress progressWriter) 
+            if (progressReader is ISavedProgress progressWriter)
                 ProgressWriters.Add(progressWriter);
 
             ProgressReaders.Add(progressReader);
