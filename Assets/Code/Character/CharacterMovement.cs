@@ -1,7 +1,6 @@
 using Code.CameraLogic;
 using Code.Data;
 using Code.Services.Input;
-using Code.Services.PersistentProgress;
 using Code.Services.PersistentProgress.SaveLoad;
 using UnityEngine;
 using UnityEngine.SceneManagement;
