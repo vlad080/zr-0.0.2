@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Code.Character;
 using Code.Infrastructure.AssetManagement;
-using Code.Services.Input;
 using Code.Services.PersistentProgress.SaveLoad;
 using UnityEngine;
 
@@ -12,12 +10,14 @@ namespace Code.Infrastructure.Factory
     {
         private readonly IAssetProvider _assetProvider;
         private readonly ICharacterFactory _characterFactory;
+        private readonly IEnemyFactory _enemyFactory;
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        public GameFactory(IAssetProvider assetProvider, ICharacterFactory characterFactory)
+        public GameFactory(IAssetProvider assetProvider, ICharacterFactory characterFactory, IEnemyFactory enemyFactory)
         {
             _characterFactory = characterFactory;
+            _enemyFactory = enemyFactory;
             _assetProvider = assetProvider;
         }
 
@@ -25,18 +25,17 @@ namespace Code.Infrastructure.Factory
         {
             GameObject character = await _characterFactory.CreateCharacter();
             RegisterProgressWatchers(character);
-
             return character;
+        }
+
+        public async Task<GameObject> CreateEnemy()
+        {
+            GameObject enemy = await _enemyFactory.CreateEnemy();
+            return enemy;
         }
 
         public async Task<GameObject> CreateHUD() =>
             await Create(AssetAddress.HUDAddress);
-
-        public async Task<GameObject> CreateEnemy()
-        {
-            GameObject enemy = await Create(AssetAddress.EnemyAddress);
-            return enemy;
-        }
 
         private async Task<GameObject> Create(string address)
         {
@@ -44,14 +43,7 @@ namespace Code.Infrastructure.Factory
             GameObject go = Object.Instantiate(prefab);
             return go;
         }
-
-        private async Task<GameObject> Create(string address, Vector3 at)
-        {
-            GameObject prefab = await _assetProvider.Load<GameObject>(address);
-            GameObject go = Object.Instantiate(prefab, at, Quaternion.identity);
-            return go;
-        }
-
+        
         public async Task WarmUp() =>
             await _assetProvider.Load<GameObject>(AssetAddress.PlayerAddress);
 

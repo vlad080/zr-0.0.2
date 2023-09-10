@@ -22,7 +22,11 @@ namespace Code.Infrastructure
             BindPersistentProgressService();
             BindSaveLoadService();
             BindCharacterFactoryService();
+            BindEnemyFactoryService();
         }
+        
+        private void BindEnemyFactoryService() =>
+            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
 
         private void BindCharacterFactoryService() =>
             Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();

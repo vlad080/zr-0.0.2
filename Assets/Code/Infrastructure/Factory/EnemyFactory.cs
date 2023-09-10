@@ -1,35 +1,31 @@
-﻿using System.Threading.Tasks;
-using Code.Character;
+using System.Threading.Tasks;
 using Code.Infrastructure.AssetManagement;
-using Code.Services.Input;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
 {
-    public class CharacterFactory : ICharacterFactory
+    public class EnemyFactory : IEnemyFactory
     {
-        private readonly IInputService _inputService;
         private readonly IAssetProvider _assetProvider;
 
-        public CharacterFactory(IInputService inputService, IAssetProvider assetProvider)
+        public EnemyFactory(IAssetProvider assetProvider)
         {
-            _inputService = inputService;
             _assetProvider = assetProvider;
         }
 
-        public async Task<GameObject> CreateCharacter()
+        public async Task<GameObject> CreateEnemy()
         {
-            GameObject character = await Create(AssetAddress.PlayerAddress);
-            character.GetComponent<CharacterMovement>().Construct(_inputService);
-            return character;
+            GameObject enemy = await Create(AssetAddress.EnemyAddress);
+            return enemy;
         }
 
-        public async Task<GameObject> Create(string address)
+        private async Task<GameObject> Create(string address)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(address);
             GameObject go = Object.Instantiate(prefab);
             return go;
         }
+
         private async Task<GameObject> Create(string address, Vector3 at)
         {
             GameObject prefab = await _assetProvider.Load<GameObject>(address);
