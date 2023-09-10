@@ -19,23 +19,9 @@ namespace Code.Infrastructure.Factory
 
         public async Task<GameObject> CreateCharacter()
         {
-           // GameObject character = await Create(AssetAddress.PlayerAddress);
-           GameObject character = await _basicFactory.Create(AssetAddress.PlayerAddress);
+            GameObject character = await _basicFactory.Create(AssetAddress.PlayerAddress);
             character.GetComponent<CharacterMovement>().Construct(_inputService);
             return character;
         }
-
-       // public async Task<GameObject> Create(string address)
-       // {
-       //     GameObject prefab = await _assetProvider.Load<GameObject>(address);
-       //     GameObject go = Object.Instantiate(prefab);
-       //     return go;
-       // }
-       // private async Task<GameObject> Create(string address, Vector3 at)
-       // {
-       //     GameObject prefab = await _assetProvider.Load<GameObject>(address);
-       //     GameObject go = Object.Instantiate(prefab, at, Quaternion.identity);
-       //     return go;
-       // }
     }
 }

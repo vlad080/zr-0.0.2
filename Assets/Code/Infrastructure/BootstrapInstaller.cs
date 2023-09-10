@@ -1,6 +1,5 @@
 ﻿using Code.Infrastructure.AssetManagement;
 using Code.Infrastructure.Factory;
-using Code.Infrastructure.States;
 using Code.Services.Input;
 using Code.Services.PersistentProgress;
 using Code.Services.PersistentProgress.SaveLoad;
@@ -18,21 +17,18 @@ namespace Code.Infrastructure
             BindJoystickService();
             BindInputService();
             BindAssetProviderService();
-            BindFactoryService();
             BindPersistentProgressService();
             BindSaveLoadService();
-            BindCharacterFactoryService();
-            BindEnemyFactoryService();
-            BindBasicFactoryService();
+            BindAllFactoryService();
         }
-        
-        private void BindBasicFactoryService() =>
-            Container.Bind<IBasicFactory>().To<BasicFactory>().AsSingle();
-        private void BindEnemyFactoryService() =>
-            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
 
-        private void BindCharacterFactoryService() =>
+        private void BindAllFactoryService()
+        {
+            Container.Bind<IBasicFactory>().To<BasicFactory>().AsSingle();
+            Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
             Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();
+            Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
+        }
 
         private void BindSaveLoadService() =>
             Container.Bind<ISavedLoadService>().To<SavedLoadService>().AsSingle();
@@ -45,9 +41,6 @@ namespace Code.Infrastructure
 
         private void BindAssetProviderService() =>
             Container.Bind<IAssetProvider>().To<AssetProvider>().AsSingle();
-
-        private void BindFactoryService() =>
-            Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
 
         private void BindInputService()
         {

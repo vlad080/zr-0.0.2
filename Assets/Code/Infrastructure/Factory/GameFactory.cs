@@ -34,8 +34,11 @@ namespace Code.Infrastructure.Factory
             return enemy;
         }
 
-        public async Task<GameObject> CreateHUD() =>
-            await Create(AssetAddress.HUDAddress);
+        public async Task<GameObject> CreateHUD()
+        {
+           // GameObject hud = await _uiFactory.CreateHUD();
+            return await Create(AssetAddress.HUDAddress);
+        }
 
         private async Task<GameObject> Create(string address)
         {

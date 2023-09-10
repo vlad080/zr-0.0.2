@@ -6,31 +6,37 @@ namespace Code.Infrastructure.Factory
 {
     public class EnemyFactory : IEnemyFactory
     {
-        private readonly IAssetProvider _assetProvider;
+        private readonly IBasicFactory _basicFactory;
 
-        public EnemyFactory(IAssetProvider assetProvider)
+        public EnemyFactory(IBasicFactory basicFactory)
         {
-            _assetProvider = assetProvider;
+            _basicFactory = basicFactory;
         }
 
         public async Task<GameObject> CreateEnemy()
         {
-            GameObject enemy = await Create(AssetAddress.EnemyAddress);
+            GameObject enemy = await _basicFactory.Create(AssetAddress.EnemyAddress);
             return enemy;
         }
+    }
 
-        private async Task<GameObject> Create(string address)
+    public class UIFactory: IUIFactory
+    {
+        private readonly IBasicFactory _basicFactory;
+        public UIFactory(IBasicFactory basicFactory)
         {
-            GameObject prefab = await _assetProvider.Load<GameObject>(address);
-            GameObject go = Object.Instantiate(prefab);
-            return go;
+            _basicFactory = basicFactory;
         }
 
-        private async Task<GameObject> Create(string address, Vector3 at)
+        public async Task<GameObject> CreateHUD()
         {
-            GameObject prefab = await _assetProvider.Load<GameObject>(address);
-            GameObject go = Object.Instantiate(prefab, at, Quaternion.identity);
-            return go;
+            GameObject hud = await _basicFactory.Create(AssetAddress.HUDAddress);
+            return hud;
         }
+    }
+
+    public interface IUIFactory
+    {
+        public Task<GameObject> CreateHUD();
     }
 }
