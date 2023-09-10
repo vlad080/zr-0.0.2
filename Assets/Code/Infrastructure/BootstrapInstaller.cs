@@ -23,8 +23,11 @@ namespace Code.Infrastructure
             BindSaveLoadService();
             BindCharacterFactoryService();
             BindEnemyFactoryService();
+            BindBasicFactoryService();
         }
         
+        private void BindBasicFactoryService() =>
+            Container.Bind<IBasicFactory>().To<BasicFactory>().AsSingle();
         private void BindEnemyFactoryService() =>
             Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
 

@@ -18,7 +18,7 @@ namespace Code.Infrastructure.Factory
             GameObject prefab = await _assetProvider.Load<GameObject>(address);
             GameObject go = Object.Instantiate(prefab);
             return go;
-        }  
+        }
 
         public async Task<GameObject> Create(string address, Vector3 at)
         {
