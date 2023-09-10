@@ -12,14 +12,16 @@ namespace Code.Infrastructure.States
         private readonly LoadingCurtain _curtain;
         private readonly IGameFactory _gameFactory;
         private readonly IPersistentProgressService _progressService;
+        private readonly IFactory _factory;
 
         public LoadLevelState(GameStateMachine stateMachine, SceneLoader sceneLoader,
-            LoadingCurtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService)
+            LoadingCurtain curtain, IGameFactory gameFactory, IPersistentProgressService progressService, IFactory factory)
         {
             _stateMachine = stateMachine;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
             _progressService = progressService;
+            _factory = factory;
             _curtain = curtain;
         }
 
@@ -36,6 +38,7 @@ namespace Code.Infrastructure.States
             await _gameFactory.CreateCharacter();
             await _gameFactory.CreateEnemy();
             await _gameFactory.CreateHUD();
+            await _factory.CharacterFactory.CreateCharacter();
         }
 
         public void Exit()
