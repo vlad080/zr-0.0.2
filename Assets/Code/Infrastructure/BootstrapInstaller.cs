@@ -27,6 +27,7 @@ namespace Code.Infrastructure
             Container.Bind<IBasicFactory>().To<BasicFactory>().AsSingle();
             Container.Bind<IEnemyFactory>().To<EnemyFactory>().AsSingle();
             Container.Bind<ICharacterFactory>().To<CharacterFactory>().AsSingle();
+            Container.Bind<IUIFactory>().To<UIFactory>().AsSingle();
             Container.Bind<IGameFactory>().To<GameFactory>().AsSingle();
         }
 

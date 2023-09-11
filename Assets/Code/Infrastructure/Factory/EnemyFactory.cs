@@ -19,24 +19,4 @@ namespace Code.Infrastructure.Factory
             return enemy;
         }
     }
-
-    public class UIFactory: IUIFactory
-    {
-        private readonly IBasicFactory _basicFactory;
-        public UIFactory(IBasicFactory basicFactory)
-        {
-            _basicFactory = basicFactory;
-        }
-
-        public async Task<GameObject> CreateHUD()
-        {
-            GameObject hud = await _basicFactory.Create(AssetAddress.HUDAddress);
-            return hud;
-        }
-    }
-
-    public interface IUIFactory
-    {
-        public Task<GameObject> CreateHUD();
-    }
 }

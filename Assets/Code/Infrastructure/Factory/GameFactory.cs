@@ -11,13 +11,16 @@ namespace Code.Infrastructure.Factory
         private readonly IAssetProvider _assetProvider;
         private readonly ICharacterFactory _characterFactory;
         private readonly IEnemyFactory _enemyFactory;
+        private readonly IUIFactory _uiFactory;
         public List<ISavedProgressReader> ProgressReaders { get; } = new List<ISavedProgressReader>();
         public List<ISavedProgress> ProgressWriters { get; } = new List<ISavedProgress>();
 
-        public GameFactory(IAssetProvider assetProvider, ICharacterFactory characterFactory, IEnemyFactory enemyFactory)
+        public GameFactory(IAssetProvider assetProvider, ICharacterFactory characterFactory, IEnemyFactory enemyFactory,
+            IUIFactory uiFactory)
         {
             _characterFactory = characterFactory;
             _enemyFactory = enemyFactory;
+            _uiFactory = uiFactory;
             _assetProvider = assetProvider;
         }
 
@@ -36,17 +39,10 @@ namespace Code.Infrastructure.Factory
 
         public async Task<GameObject> CreateHUD()
         {
-           // GameObject hud = await _uiFactory.CreateHUD();
-            return await Create(AssetAddress.HUDAddress);
+            GameObject hud = await _uiFactory.CreateHUD();
+            return hud;
         }
 
-        private async Task<GameObject> Create(string address)
-        {
-            GameObject prefab = await _assetProvider.Load<GameObject>(address);
-            GameObject go = Object.Instantiate(prefab);
-            return go;
-        }
-        
         public async Task WarmUp() =>
             await _assetProvider.Load<GameObject>(AssetAddress.PlayerAddress);
 

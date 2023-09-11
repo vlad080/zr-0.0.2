@@ -1,32 +1,34 @@
+using System.Collections;
 using Code.Character;
 using Code.Data;
 using Code.Infrastructure.Factory;
 using Code.Player;
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 namespace Code.Enemy
 {
-    public class AgentMoveToPlayer : MonoBehaviour
+    public class AgentMoveToPlayer : Follow
     {
         public NavMeshAgent Agent;
         private Transform _target;
         private IGameFactory _gameFactory;
-        [Inject]
-        public void Construct(IGameFactory gameFactory)
-        {
-            _gameFactory = gameFactory;
-        }
-
+        
+        
         private void Start()
         {
+            StartCoroutine(GetTarget());
+        }
+
+        private IEnumerator GetTarget()
+        {
+            yield return new WaitForSeconds(1);
             _target = FindObjectOfType<CharacterMovement>().transform;
         }
 
         private void Update()
         {
-            if(_target && IsHeroNotReached())
+            if(_target != null && IsHeroNotReached())
                 Agent.destination = _target.position;
         }
     
